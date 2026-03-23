@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "prompt",
-            "prompt": "aidlc-docs/manifest.md が存在する場合、今書き込んだファイルが aidlc-docs/ 配下のものであれば manifest.md の該当行のステータスと最終更新日を更新してください。manifest.md が存在しない場合は何もしないでください。コンテキスト: $ARGUMENTS"
+            "prompt": "aidlc-docs/manifest.md が存在する場合、今書き込んだファイルが aidlc-docs/ 配下のものであれば manifest.md の該当行のステータスと最終更新日を更新してください。manifest.md が存在しない場合は何もしないでください。"
           }
         ]
       }
@@ -16,7 +16,7 @@
         "hooks": [
           {
             "type": "prompt",
-            "prompt": "エージェントの実行が完了しました。aidlc-docs/prompts.md が存在する場合、エージェント実行の記録を追記してください。存在しない場合は何もしないでください。コンテキスト: $ARGUMENTS"
+            "prompt": "エージェントの実行が完了しました。aidlc-docs/prompts.md が存在する場合、エージェント実行の記録を追記してください。存在しない場合は何もしないでください。"
           }
         ]
       }

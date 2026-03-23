@@ -7,6 +7,8 @@ description: >
 model: sonnet
 effort: medium
 maxTurns: 15
+tools: Read, Write, Glob, Grep, Bash
+disallowedTools: Edit, WebFetch, WebSearch
 ---
 
 # 検証レポート生成エージェント

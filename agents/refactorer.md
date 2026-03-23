@@ -7,6 +7,8 @@ description: >
 model: sonnet
 effort: medium
 maxTurns: 20
+tools: Read, Edit, Glob, Grep, Bash
+disallowedTools: Write, WebFetch, WebSearch
 ---
 
 # リファクタリングエージェント

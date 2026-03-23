@@ -1,6 +1,6 @@
 # AI-DLC サブエージェント入出力仕様
 
-## ステータス: ドラフト（議論中）
+## ステータス: v0.2.0 確定
 
 ---
 
@@ -97,6 +97,10 @@
 - テスト実行可能（全件 fail するが、構文エラーではなく AssertionError 等）
 - 受け入れ基準とテストの1:1対応が明示されている（テスト名にUS-IDを含む）
 
+**ツール制限:**
+- tools: Read, Write, Glob, Grep, Bash
+- disallowedTools: Edit, WebFetch, WebSearch
+
 ---
 
 ### 2.2 A5: code-generator
@@ -141,6 +145,10 @@
 **失敗時の振る舞い:**
 - テストが通らない場合: `status: failure` + 失敗したテストと原因分析を `issues` に含める
 - build-boltスキルが再実行を判断（入力修正なしでリトライ可能）
+
+**ツール制限:**
+- tools: Read, Write, Edit, Glob, Grep, Bash
+- disallowedTools: WebFetch, WebSearch
 
 ---
 
@@ -187,6 +195,10 @@
   提案の選択が必要だった旧設計から変更し、テストが通る限り自動適用する。
 - テストが落ちる改善は自動ロールバックし、`issues` にその旨を報告。
 
+**ツール制限:**
+- tools: Read, Edit, Glob, Grep, Bash
+- disallowedTools: Write, WebFetch, WebSearch
+
 ---
 
 ### 2.4 A7: infra-impl
@@ -232,6 +244,10 @@
 - 統合テストの生成は行うが、テストの承認は build-bolt スキルが人間に委ねる。
 - したがってこのサブエージェントは `status: needs_human` で返すのが正常フロー。
   `summary` に「統合テストの人間レビューが必要です」を含める。
+
+**ツール制限:**
+- tools: Read, Write, Edit, Glob, Grep, Bash
+- disallowedTools: WebFetch, WebSearch
 
 ---
 
@@ -289,6 +305,10 @@ Red-Green-Refactorの各フェーズの実行記録も含めること。
 
 **成功基準:**
 - レポートが生成されること（テスト結果が全件パスでなくてもレポートは生成する）
+
+**ツール制限:**
+- tools: Read, Write, Glob, Grep, Bash
+- disallowedTools: Edit, WebFetch, WebSearch
 
 ---
 
@@ -356,6 +376,10 @@ Red-Green-Refactorの各フェーズの実行記録も含めること。
 {修正が入ったファイル一覧と変更内容の要約}
 ```
 
+**ツール制限:**
+- tools: Read, Write, Edit, Glob, Grep
+- disallowedTools: Bash, WebFetch, WebSearch
+
 ---
 
 ## 3. build-bolt からの呼び出しシーケンス
@@ -401,6 +425,47 @@ build-bolt step6:
   → 両結果を統合して人間に提示
 ```
 
+
+### 3.1 A2: handoff-generator（汎用・再利用可能）
+
+**目的:** スキル完了時にハンドオフ文書を自動生成する。
+
+**呼び出し元:** 全スキルの on_complete 処理
+
+**directive:**
+```
+manifest.md と現在のスキルの成果物から、次スキルへのハンドオフ文書を生成せよ。
+共通ヘッダー（type, from, to, created, status, manifest, prerequisites）と
+スキル固有ペイロードを含むこと。
+aidlc-interface-contract.md のフォーマットに準拠すること。
+```
+
+**inputs:**
+| # | ファイル | 用途 |
+|---|---------|------|
+| 1 | `aidlc-docs/manifest.md` | 成果物台帳（ステータス確認） |
+| 2 | スキル固有の成果物ファイル群 | ペイロード生成の情報源 |
+| 3 | `docs/aidlc-interface-contract.md` | ハンドオフフォーマット参照 |
+
+**パラメータ:**
+| パラメータ | 値 | 説明 |
+|-----------|-----|------|
+| from_skill | S1〜S7 | 生成元スキルID |
+| to_skill | S2〜S7 | 宛先スキルID |
+
+**outputs:**
+| # | ファイル | 内容 |
+|---|---------|------|
+| 1 | `aidlc-docs/handoffs/to_{target}.md` | ハンドオフ文書 |
+
+**成功基準:**
+- 共通ヘッダーの全必須フィールドが設定されている
+- prerequisites が manifest.md の現在のステータスと整合している
+
+**ツール制限:**
+- tools: Read, Write, Glob, Grep
+- disallowedTools: Edit, Bash, WebFetch, WebSearch
+
 ---
 
 ## 4. 構想フェーズのサブエージェント仕様
@@ -426,6 +491,10 @@ build-bolt step6:
 - US-001: ストーリーが大きすぎる（S基準違反）→ 分割を推奨
 - US-003: 受け入れ基準が曖昧（T基準違反）→ 具体的な検証条件に修正を推奨
 ```
+
+**ツール制限:**
+- tools: Read, Glob, Grep
+- disallowedTools: Write, Edit, Bash, WebFetch, WebSearch
 
 ---
 
@@ -455,6 +524,10 @@ build-bolt step6:
 | 1 | `{project}/iac/` | IaCコード |
 | 2 | `{project}/iac/README.md` | デプロイ手順書 |
 
+**ツール制限:**
+- tools: Read, Write, Glob, Grep, Bash
+- disallowedTools: Edit, WebFetch, WebSearch
+
 ### 5.2 A10: pipeline-generator
 
 **呼び出し元:** S6:release
@@ -470,6 +543,10 @@ build-bolt step6:
 | # | ファイル | 内容 |
 |---|---------|------|
 | 1 | `{project}/ci/` | パイプライン定義ファイル |
+
+**ツール制限:**
+- tools: Read, Write, Glob, Grep
+- disallowedTools: Edit, Bash, WebFetch, WebSearch
 
 ### 5.3 A11: monitoring-setup
 
@@ -489,3 +566,7 @@ build-bolt step6:
 | 1 | `{project}/monitoring/dashboards/` | ダッシュボード定義 |
 | 2 | `{project}/monitoring/alarms/` | アラーム定義 |
 | 3 | `{project}/monitoring/runbooks/` | ランブック |
+
+**ツール制限:**
+- tools: Read, Write, Glob, Grep
+- disallowedTools: Edit, Bash, WebFetch, WebSearch

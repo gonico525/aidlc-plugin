@@ -7,6 +7,8 @@ description: >
 model: sonnet
 effort: medium
 maxTurns: 10
+tools: Read, Write, Glob, Grep
+disallowedTools: Edit, Bash, WebFetch, WebSearch
 ---
 
 # ハンドオフ生成エージェント

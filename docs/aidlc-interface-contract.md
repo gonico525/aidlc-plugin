@@ -1,6 +1,6 @@
 # AI-DLC インターフェース契約仕様
 
-## ステータス: ドラフト（議論中）
+## ステータス: v0.2.0 確定
 
 ---
 
@@ -50,35 +50,35 @@ aidlc-docs/
 ### requirements（要件）
 | ID | ファイル | 生成元 | ステータス | 最終更新 |
 |----|---------|--------|----------|---------|
-| REQ-001 | requirements/nfr_definition.md | S1:user-stories | 確定 | YYYY-MM-DD |
-| REQ-002 | requirements/risk_description.md | S1:user-stories | 確定 | YYYY-MM-DD |
-| REQ-003 | requirements/business_metrics.md | S1:user-stories | 確定 | YYYY-MM-DD |
-| REQ-004 | requirements/ubiquitous_language.md | S1:user-stories | 確定 | YYYY-MM-DD |
+| REQ-001 | requirements/nfr_definition.md | S1:aidlc-user-stories | 確定 | YYYY-MM-DD |
+| REQ-002 | requirements/risk_description.md | S1:aidlc-user-stories | 確定 | YYYY-MM-DD |
+| REQ-003 | requirements/business_metrics.md | S1:aidlc-user-stories | 確定 | YYYY-MM-DD |
+| REQ-004 | requirements/ubiquitous_language.md | S1:aidlc-user-stories | 確定 | YYYY-MM-DD |
 
 ### stories（ストーリー）
 | ID | ファイル | 生成元 | ステータス | 最終更新 |
 |----|---------|--------|----------|---------|
-| STR-001 | story-artifacts/{領域名}_stories.md | S1:user-stories | 確定 | YYYY-MM-DD |
+| STR-001 | story-artifacts/{領域名}_stories.md | S1:aidlc-user-stories | 確定 | YYYY-MM-DD |
 
 ### units（ユニット）
 | ID | ファイル | 生成元 | ステータス | 最終更新 |
 |----|---------|--------|----------|---------|
-| UNT-001 | design-artifacts/units/{ユニット名}.md | S2:unit-decomposition | 確定 | YYYY-MM-DD |
+| UNT-001 | design-artifacts/units/{ユニット名}.md | S2:aidlc-unit-decomposition | 確定 | YYYY-MM-DD |
 
 ### designs（設計）
 | ID | ファイル | 生成元 | ステータス | 最終更新 |
 |----|---------|--------|----------|---------|
-| DSG-001 | design-artifacts/domain-models/{ユニット名}_domain_model.md | S4:build-bolt | 確定 | YYYY-MM-DD |
-| DSG-002 | design-artifacts/logical-designs/{ユニット名}_logical_design.md | S4:build-bolt | 確定 | YYYY-MM-DD |
-| DSG-003 | design-artifacts/adrs/adr_{番号}_{タイトル}.md | S4:build-bolt | 承認 | YYYY-MM-DD |
+| DSG-001 | design-artifacts/domain-models/{ユニット名}_domain_model.md | S4:aidlc-build-bolt | 確定 | YYYY-MM-DD |
+| DSG-002 | design-artifacts/logical-designs/{ユニット名}_logical_design.md | S4:aidlc-build-bolt | 確定 | YYYY-MM-DD |
+| DSG-003 | design-artifacts/adrs/adr_{番号}_{タイトル}.md | S4:aidlc-build-bolt | 承認 | YYYY-MM-DD |
 
 ### code（コード）
 | ID | ファイル/ディレクトリ | 生成元 | ステータス | 最終更新 |
 |----|-------------------|--------|----------|---------|
-| COD-001 | {project}/src/domain/ | S4:build-bolt | テスト済み | YYYY-MM-DD |
-| COD-002 | {project}/src/infrastructure/ | S4:build-bolt | テスト済み | YYYY-MM-DD |
-| COD-003 | {project}/tests/ | S4:build-bolt | パス | YYYY-MM-DD |
-| COD-004 | {project}/iac/ | S5:iac | 生成済み | YYYY-MM-DD |
+| COD-001 | {project}/src/domain/ | S4:aidlc-build-bolt | テスト済み | YYYY-MM-DD |
+| COD-002 | {project}/src/infrastructure/ | S4:aidlc-build-bolt | テスト済み | YYYY-MM-DD |
+| COD-003 | {project}/tests/ | S4:aidlc-build-bolt | パス | YYYY-MM-DD |
+| COD-004 | {project}/iac/ | S5:aidlc-iac | 生成済み | YYYY-MM-DD |
 
 ### reports（レポート）
 | ID | ファイル | 生成元 | ステータス | 最終更新 |
@@ -89,8 +89,8 @@ aidlc-docs/
 ### plans（計画）
 | ID | ファイル | 生成元 | ステータス | 最終更新 |
 |----|---------|--------|----------|---------|
-| PLN-001 | plans/user_stories_plan.md | S1:user-stories | 完了 | YYYY-MM-DD |
-| PLN-002 | plans/bolt_schedule.md | S2:unit-decomposition | 確定 | YYYY-MM-DD |
+| PLN-001 | plans/user_stories_plan.md | S1:aidlc-user-stories | 完了 | YYYY-MM-DD |
+| PLN-002 | plans/bolt_schedule.md | S2:aidlc-unit-decomposition | 確定 | YYYY-MM-DD |
 ```
 
 ### 2.2 運用ルール
@@ -109,8 +109,8 @@ aidlc-docs/
 ```markdown
 ---
 type: handoff
-from: {生成元スキルID — 例: S1:user-stories}
-to: {宛先スキルID — 例: S2:unit-decomposition}
+from: {生成元スキルID — 例: S1:aidlc-user-stories}
+to: {宛先スキルID — 例: S2:aidlc-unit-decomposition}
 created: {YYYY-MM-DD HH:MM}
 status: {ready / blocked}
 blocked_reason: {statusがblockedの場合のみ。例: "NFR定義が未完了"}

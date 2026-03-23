@@ -7,6 +7,8 @@ description: >
 model: sonnet
 effort: high
 maxTurns: 20
+tools: Read, Write, Glob, Grep, Bash
+disallowedTools: Edit, WebFetch, WebSearch
 ---
 
 # テストコード生成エージェント

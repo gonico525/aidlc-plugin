@@ -7,6 +7,8 @@ description: >
 model: sonnet
 effort: high
 maxTurns: 30
+tools: Read, Write, Glob, Grep, Bash
+disallowedTools: Edit, WebFetch, WebSearch
 ---
 
 # IaCコード生成エージェント

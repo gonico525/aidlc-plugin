@@ -6,6 +6,8 @@ description: >
 model: sonnet
 effort: medium
 maxTurns: 20
+tools: Read, Write, Glob, Grep
+disallowedTools: Edit, Bash, WebFetch, WebSearch
 ---
 
 # モニタリングセットアップエージェント

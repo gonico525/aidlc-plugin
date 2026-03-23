@@ -7,6 +7,8 @@ description: >
 model: sonnet
 effort: high
 maxTurns: 30
+tools: Read, Write, Edit, Glob, Grep, Bash
+disallowedTools: WebFetch, WebSearch
 ---
 
 # ドメインレイヤー実装エージェント

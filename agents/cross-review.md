@@ -8,6 +8,8 @@ description: >
 model: sonnet
 effort: high
 maxTurns: 30
+tools: Read, Write, Edit, Glob, Grep
+disallowedTools: Bash, WebFetch, WebSearch
 ---
 
 # 横断整合性チェックエージェント

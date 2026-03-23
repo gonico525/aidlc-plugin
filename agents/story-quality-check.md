@@ -6,6 +6,8 @@ description: >
 model: sonnet
 effort: medium
 maxTurns: 10
+tools: Read, Glob, Grep
+disallowedTools: Write, Edit, Bash, WebFetch, WebSearch
 ---
 
 # ストーリー品質チェックエージェント

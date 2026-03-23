@@ -1,16 +1,20 @@
 ---
-name: iac
+name: aidlc-iac
 description: >
-  AI-DLCにおけるIaC（Infrastructure as Code）生成・管理スキル。
-  全ボルト完了後に実行し、論理設計のサービスマッピングに基づいて
-  IaCコードを生成する。build-boltスキルとは別セッションで実行する。
-  このスキルは以下の場合にトリガーすべき：ユーザーが「IaC」「インフラコード」
-  「Terraform」「CDK」「CloudFormation」「デプロイメントコード」
-  「インフラストラクチャ」と言及した場合。
-  build-boltスキルで全ボルトが完了した後に使用する。
+  AI-DLCにおけるIaC生成・管理スキル。
+  全ボルト完了後に論理設計のサービスマッピングに基づきIaCコードを生成する。
+allowed-tools: Read, Write, Edit, Glob, Grep, Bash
+model: sonnet
+effort: high
 ---
 
 # AI-DLC IaCスキル
+
+## トリガー条件
+
+以下の場合にこのスキルを使用する：
+- ユーザーが「IaC」「インフラコード」「Terraform」「CDK」「CloudFormation」「デプロイメントコード」「インフラストラクチャ」と言及した場合
+- aidlc-build-boltスキルで全ボルトが完了した後に使用する
 
 ## このスキルの目的
 
