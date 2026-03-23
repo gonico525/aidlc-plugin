@@ -1,0 +1,8 @@
+{
+    "name": "aidlc-plugin",
+    "description": "AI-DLC plugin for Claude",
+    "version": "1.0.0",
+    "author": {
+        "name": "gonico"
+    }
+}
