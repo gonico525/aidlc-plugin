@@ -1,5 +1,5 @@
 ---
-name: aidlc-operate
+name: operate
 description: >
   AI-DLCの運用フェーズスキル。デプロイ済みシステムの観測、異常検知、
   インシデント対応を支援する。

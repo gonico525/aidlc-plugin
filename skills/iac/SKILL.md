@@ -1,5 +1,5 @@
 ---
-name: aidlc-iac
+name: iac
 description: >
   AI-DLCにおけるIaC生成・管理スキル。
   全ボルト完了後に論理設計のサービスマッピングに基づきIaCコードを生成する。

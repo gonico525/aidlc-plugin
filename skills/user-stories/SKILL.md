@@ -1,5 +1,5 @@
 ---
-name: aidlc-user-stories
+name: user-stories
 description: >
   AI-DLCの構想フェーズにおけるユーザーストーリー計画・詳細化スキル。
   高レベルの意図からユーザーストーリー、受け入れ基準、NFR、リスク説明を生成する。

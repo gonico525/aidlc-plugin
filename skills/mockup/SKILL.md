@@ -1,5 +1,5 @@
 ---
-name: aidlc-mockup
+name: mockup
 description: >
   AI-DLCの構想フェーズにおけるUIモックアップ作成スキル。
   ストーリーと受け入れ基準から画面一覧、画面遷移図、UIモックアップを生成する。

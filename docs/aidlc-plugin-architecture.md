@@ -50,20 +50,20 @@ AI-DLCのプラグインシステムは **スキル** と **サブエージェ�
 
 ```
 構想フェーズ (envision)
-├── S1: aidlc-user-stories               — 意図→ストーリー詳細化 [PO + チーム]
-├── S2: aidlc-unit-decomposition     — ストーリー→ユニット分解 [PO + アーキテクト]
-└── S3: aidlc-mockup                           — UIモックアップ作成 [任意]
+├── S1: user-stories               — 意図→ストーリー詳細化 [PO + チーム]
+├── S2: unit-decomposition     — ストーリー→ユニット分解 [PO + アーキテクト]
+└── S3: mockup                           — UIモックアップ作成 [任意]
 
 構築フェーズ (build)
-├── S4: aidlc-build-bolt                   — 1ボルトの全工程 [開発者] ※ボルト単位で反復
-└── S5: aidlc-iac                                 — IaC生成・管理 [開発者/SRE] ※全ボルト完了後
+├── S4: build-bolt                   — 1ボルトの全工程 [開発者] ※ボルト単位で反復
+└── S5: iac                                 — IaC生成・管理 [開発者/SRE] ※全ボルト完了後
 
 リリース・運用フェーズ (release / operate)
-├── S6: aidlc-release                         — CI/CD・環境構築・デプロイ [SRE]
-└── S7: aidlc-operate                         — 観測・インシデント対応 [開発者/SRE]
+├── S6: release                         — CI/CD・環境構築・デプロイ [SRE]
+└── S7: operate                         — 観測・インシデント対応 [開発者/SRE]
 
 メタ（プラグイン自体の保守）
-└── S8: aidlc-plugin-audit               — 公式仕様準拠性の監査・改修 [開発者]
+└── S8: plugin-audit               — 公式仕様準拠性の監査・改修 [開発者]
 ```
 
 ### 2.2 サブエージェント一覧（11個）
@@ -168,14 +168,14 @@ build-bolt スキル
 
 | 現行スキル | 改訂後 | 変更内容 |
 |-----------|--------|---------|
-| aidlc-user-stories | S1: aidlc-user-stories | 変更なし |
-| aidlc-unit-decomposition | S2: aidlc-unit-decomposition | 変更なし |
-| aidlc-mockup | S3: aidlc-mockup | 変更なし |
-| aidlc-design | S4: aidlc-build-bolt の step1-2 | build-boltに統合 |
-| aidlc-implementation | S4: aidlc-build-bolt の step3-6 | build-boltに統合、サブエージェント化 |
-| aidlc-release | S6: aidlc-release | 変更なし |
-| （なし） | S5: aidlc-iac | 新規独立スキル（implementationから分離） |
-| （なし） | S7: aidlc-operate | 新規スキル（運用フェーズ） |
+| aidlc-user-stories | S1: user-stories | 変更なし |
+| aidlc-unit-decomposition | S2: unit-decomposition | 変更なし |
+| aidlc-mockup | S3: mockup | 変更なし |
+| aidlc-design | S4: build-bolt の step1-2 | build-boltに統合 |
+| aidlc-implementation | S4: build-bolt の step3-6 | build-boltに統合、サブエージェント化 |
+| aidlc-release | S6: release | 変更なし |
+| （なし） | S5: iac | 新規独立スキル（implementationから分離） |
+| （なし） | S7: operate | 新規スキル（運用フェーズ） |
 
 ---
 
@@ -241,14 +241,14 @@ aidlc-plugin/
 
 | 旧スキル | 新コンポーネント | 変更 |
 |---------|---------------|------|
-| aidlc-user-stories | S1: aidlc-user-stories | エージェント参照に更新 |
-| aidlc-unit-decomposition | S2: aidlc-unit-decomposition | エージェント参照に更新 |
-| aidlc-mockup | S3: aidlc-mockup | 参照先を更新 |
-| aidlc-design | S4: aidlc-build-bolt (step1-2) | build-boltに統合 |
-| aidlc-implementation | S4: aidlc-build-bolt (step3-6) | build-boltに統合 |
-| aidlc-release | S6: aidlc-release | ハンドオフパスを更新 |
-| (なし) | S5: aidlc-iac | 新規 |
-| (なし) | S7: aidlc-operate | 新規 |
+| aidlc-user-stories | S1: user-stories | エージェント参照に更新 |
+| aidlc-unit-decomposition | S2: unit-decomposition | エージェント参照に更新 |
+| aidlc-mockup | S3: mockup | 参照先を更新 |
+| aidlc-design | S4: build-bolt (step1-2) | build-boltに統合 |
+| aidlc-implementation | S4: build-bolt (step3-6) | build-boltに統合 |
+| aidlc-release | S6: release | ハンドオフパスを更新 |
+| (なし) | S5: iac | 新規 |
+| (なし) | S7: operate | 新規 |
 | (なし) | agents/* (11個) | 全て新規 |
 
 ### 6.3 インストール方法

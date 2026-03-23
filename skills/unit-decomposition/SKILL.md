@@ -1,5 +1,5 @@
 ---
-name: aidlc-unit-decomposition
+name: unit-decomposition
 description: >
   AI-DLCの構想フェーズにおけるユニット分解スキル。
   ユーザーストーリーを独立構築可能なユニットにグループ化しボルト計画を策定する。

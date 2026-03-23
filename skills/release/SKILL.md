@@ -1,5 +1,5 @@
 ---
-name: aidlc-release
+name: release
 description: >
   AI-DLCのリリーススキル。CI/CDパイプライン構築、環境管理、デプロイメント実行、
   観測可能性設定を行い本番リリースまでを支援する。

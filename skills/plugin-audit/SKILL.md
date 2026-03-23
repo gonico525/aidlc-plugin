@@ -1,5 +1,5 @@
 ---
-name: aidlc-plugin-audit
+name: plugin-audit
 description: >
   AI-DLCプラグインの公式仕様準拠性を監査・改修するスキル。
   Claude Code Plugin/Skill/Agent の公式仕様と現在のプラグイン実装を照合し、

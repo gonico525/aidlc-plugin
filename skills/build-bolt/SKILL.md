@@ -1,5 +1,5 @@
 ---
-name: aidlc-build-bolt
+name: build-bolt
 description: >
   AI-DLCの構築フェーズ統合スキル。1ボルトの全工程（ドメイン設計→論理設計→テスト契約→
   Red-Green-Refactor→インフラ実装→横断検証）を1セッションで実行する。
