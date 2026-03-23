@@ -3,13 +3,24 @@
   "version": "0.2.0",
   "description": "AI-Driven Development Lifecycle (AI-DLC) plugin. Provides skills and agents for the full AI-DLC workflow: envision, build, release, and operate phases.",
   "author": {
-    "name": "AI-DLC Contributors"
+    "name": "gonico525"
   },
   "license": "MIT",
   "repository": "https://github.com/gonico525/aidlc-plugin",
   "homepage": "https://github.com/gonico525/aidlc-plugin#readme",
   "keywords": ["aidlc", "sdlc", "ddd", "bdd", "tdd", "domain-driven-design", "test-driven", "development-lifecycle"],
-  "skills": "./skills/",
-  "agents": "./agents/",
-  "hooks": "./hooks/hooks.json"
+  "skills": ["./skills/"],
+  "agents": [
+    "./agents/code-generator.md",
+    "./agents/cross-review.md",
+    "./agents/handoff-generator.md",
+    "./agents/iac-generator.md",
+    "./agents/infra-impl.md",
+    "./agents/monitoring-setup.md",
+    "./agents/pipeline-generator.md",
+    "./agents/refactorer.md",
+    "./agents/story-quality-check.md",
+    "./agents/test-generator.md",
+    "./agents/verification-report.md"
+  ]
 }
