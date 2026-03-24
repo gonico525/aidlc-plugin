@@ -3,6 +3,7 @@ name: build-bolt
 description: >
   AI-DLCの構築フェーズ統合スキル。1ボルトの全工程（ドメイン設計→論理設計→テスト契約→
   Red-Green-Refactor→インフラ実装→横断検証）を1セッションで実行する。
+  並行実行対応: 複数ボルトを別セッション・別worktreeで同時実行可能。
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash
 model: opus
 effort: max
@@ -32,6 +33,7 @@ AI-DLCの構築フェーズにおいて、1ボルトの全工程を1つの連続
 ブラウンフィールドのモデル昇格は `references/brownfield-promotion.md` を参照。
 コード生成パターンは `references/code-generation.md` を参照。
 テスト戦略は `references/testing-strategy.md` を参照。
+並行実行の手順は `references/parallel-execution-guide.md` を参照。
 
 ---
 
@@ -59,6 +61,18 @@ AI-DLCの構築フェーズにおいて、1ボルトの全工程を1つの連続
 3. 作業対象のユニットとボルトを確認する（ユーザーに指定してもらう）
 4. グリーンフィールドかブラウンフィールドかを確認する
 5. フレーバー（DDD/BDD/TDD）を確認する
+6. **実行モードを確認する:**
+   - **ボルト実行モード（デフォルト）** — 特定のボルトを設計・実装する
+   - **完了モード** — 全ボルト完了後のファイナライズ（to_iac.md 生成）
+7. **ボルト実行モードの場合:**
+   a. `plans/bolt_schedule.md` を読み込み、選択ボルトの前提条件を検証する
+      - 前提ボルトの成果物（verification_report）が統合ブランチの manifest.md に存在するか確認
+      - 未充足の場合はユーザーに警告し、続行するか判断を仰ぐ
+   b. git worktree を作成し、ボルト専用の作業ディレクトリを確保する:
+      `git worktree add .worktrees/bolt-{ユニット名}-{ボルトID} -b bolt/{ユニット名}/{ボルトID}`
+   c. 作業ディレクトリを worktree に移動する
+   d. 以降の全ステップはこの worktree 上で実行する
+8. **完了モードの場合:** → step6-final（完了モード処理）にジャンプする
 
 フォルダ構造を作成する（存在しない場合）:
 
@@ -68,6 +82,14 @@ aidlc-docs/design-artifacts/
 ├── logical-designs/
 └── adrs/
 ```
+
+### 成果物IDの命名規則（並行実行対応）
+
+manifest.md の成果物IDにボルト識別子を含めることで、並行セッション間での一意性を保証する:
+- `DSG-B{ユニット番号}.{ボルト番号}-{連番}` （例: DSG-B1.1-001）
+- `COD-B{ユニット番号}.{ボルト番号}-{連番}` （例: COD-B1.1-001）
+- `RPT-B{ユニット番号}.{ボルト番号}-{連番}` （例: RPT-B1.1-001）
+- `ADR-B{ユニット番号}.{ボルト番号}-{連番}` （例: ADR-B1.1-001）
 
 ### step1: ドメイン設計
 
@@ -161,7 +183,30 @@ AIは以下を提案し、開発者が検証する:
 
 結果をユーザーに提示。全成果物のステータスをmanifest.mdで最終確認。
 
-**次のボルトがあればstep0に戻る。全ボルト完了後、handoffs/to_iac.md を生成。**
+**ボルト完了処理（ボルト実行モード）:**
+1. manifest.md の自ボルト成果物のステータスを最終確認する
+2. worktree 上で全変更をコミットする
+3. ユーザーにボルト完了を報告する
+4. 統合ブランチへのPR作成を推奨する: `bolt/{ユニット名}/{ボルトID}` → 統合ブランチ
+5. `bolt_schedule.md` に基づき、次に実行可能なボルトを提示する
+6. 全ボルトが完了済みの場合、完了モードの実行を推奨する
+7. worktree のクリーンアップはPRマージ後にユーザーが実施:
+   `git worktree remove .worktrees/bolt-{ユニット名}-{ボルトID}`
+
+### step6-final: 完了モード処理（全ボルト完了後）
+
+完了モードは統合ブランチ上で直接実行する（worktreeは作成しない）。
+
+1. `bolt_schedule.md` を読み込み、全ボルトの一覧を取得する
+2. 各ボルトの `verification_report_{bolt}.md` が manifest.md に存在するか確認する
+   - 不足がある場合、未完了ボルトを一覧表示して中断する
+3. 全 `bolt/` ブランチが統合ブランチにマージ済みか確認する
+   - 未マージがある場合、未マージブランチを一覧表示して中断する
+4. 統合ブランチ上で全テストを一括実行する
+5. `aidlc:cross-review` エージェントを全ユニット横断で実行する
+   レビュー観点: CODE_MODEL_ALIGN, AC_TEST_ALIGN, ADR_IMPL_ALIGN
+6. `aidlc:handoff-generator` エージェントで `handoffs/to_iac.md` を生成する
+7. ユーザーに完了報告と次フェーズ（aidlc:iac）の開始を提示する
 
 ---
 

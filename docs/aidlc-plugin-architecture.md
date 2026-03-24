@@ -148,7 +148,14 @@ build-bolt スキル
 │   ├── ← A8: verification-report 呼び出し
 │   └── ← A1: cross-review 呼び出し（コード-設計整合性チェック）
 │
-└── → 次のボルトがあればstep0に戻る
+├── → ボルト完了（コミット・PR作成を推奨、セッション終了）
+│
+└── step6-final: 完了モード（全ボルト完了後のファイナライズ）
+    ├── 全ボルトの verification_report 存在確認
+    ├── 全 bolt/ ブランチのマージ済み確認
+    ├── 統合ブランチ上で全テスト一括実行
+    ├── ← A1: cross-review 呼び出し（全ユニット横断）
+    └── ← A2: handoff-generator 呼び出し（to_iac.md 生成）
 ```
 
 ### 3.2 承認ゲートの一覧
@@ -161,6 +168,50 @@ build-bolt スキル
 | step4 | なし（テストが契約として機能） | — | — |
 | step5 | 統合テスト | 中 | 開発者 |
 | step6 | 検証レポート確認 | 中 | 開発者 |
+
+### 3.3 並行ボルト実行モデル
+
+複数ボルトを同時に実行することで、構築フェーズのスループットを向上させる。
+
+**原則: 1セッション = 1ボルト**
+
+各ボルトは独立した `claude` CLIプロセス（メイン会話）として動作する。
+これは Claude Code のサブエージェントが他のサブエージェントを呼び出せない
+（ネストは1階層のみ）という制約に起因する。build-bolt は内部で
+test-generator, code-generator, refactorer 等のサブエージェントを呼び出すため、
+ボルト自体をサブエージェントに降格させることはできない。
+
+**git worktree による作業ディレクトリ分離**
+
+```
+プロジェクトルート/
+├── (統合ブランチの作業ディレクトリ)
+└── .worktrees/
+    ├── bolt-user-management-1.1/    ← ターミナルA（bolt/user-management/1.1 ブランチ）
+    ├── bolt-payment-processing-2.1/ ← ターミナルB（bolt/payment-processing/2.1 ブランチ）
+    └── ...
+```
+
+各 worktree は独立したブランチで動作するため、ファイルシステムの衝突は発生しない。
+manifest.md への書き込みはボルト識別子付きIDで一意性を保証し、
+Git マージ時に追記行が統合される。
+
+**実行フロー:**
+
+```
+[unit-decomposition] bolt_schedule.md 生成（並行実行グループを含む）
+        ↓
+[開発者] 並行実行グループを確認し、独立ボルトごとにターミナルを起動
+        ↓
+[ターミナルA] aidlc:build-bolt → Bolt-1.1 → worktree 作成 → step0〜step6 → PR作成
+[ターミナルB] aidlc:build-bolt → Bolt-2.1 → worktree 作成 → step0〜step6 → PR作成
+        ↓ （各PRをレビュー・マージ）
+[依存ボルト] 先行ボルトマージ後に後続ボルトのセッションを開始
+        ↓ （全ボルトマージ完了）
+[完了モード] aidlc:build-bolt → 完了モード → 統合テスト → 横断レビュー → to_iac.md 生成
+```
+
+詳細な手順は `skills/build-bolt/references/parallel-execution-guide.md` を参照。
 
 ---
 
