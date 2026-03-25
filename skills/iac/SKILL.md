@@ -55,9 +55,27 @@ AIが以下を提案し、開発者/SREが承認する:
 生成されたコードを開発者/SREに提示しレビューを依頼する。
 **[承認ゲート]** IaCコードが承認されるまで次のステップに進まない。
 
+**成果物登録・コミット:** IaCコードを manifest.md に登録し、prompts.md に記録してコミットする。
+コミット: `aidlc(iac): step2 IaCコード生成`
+
 ### step3: 検証
 
-IaCコードの静的検証（lint、セキュリティチェック）を実行し、
-結果をmanifest.mdに登録する。
+IaCコードの静的検証（lint、セキュリティチェック）を実行する。
 
 完了後、`aidlc:handoff-generator` エージェントで `handoffs/to_release.md` を生成。
+
+**成果物登録・コミット:** 検証結果と引き継ぎファイルを manifest.md に登録し、
+全成果物が manifest.md に漏れなく登録されていることを最終確認する。
+prompts.md に記録してコミットする。
+コミット: `aidlc(iac): step3 検証・引き継ぎ完了`
+
+---
+
+## 成果物の記録・コミット規約
+
+各ステップで成果物を保存した際、以下を一連の流れで実行する:
+1. **prompts.md 記録** — 実行内容の要約を `aidlc-docs/prompts.md` に追記する
+2. **manifest.md 登録** — 保存したファイルを `aidlc-docs/manifest.md` に登録する
+3. **コミット** — 成果物ファイル + manifest.md + prompts.md をまとめてコミットする
+
+コミットメッセージ規約: `aidlc(iac): step{N} {概要}`
