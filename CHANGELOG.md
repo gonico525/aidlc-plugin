@@ -5,6 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2026-03-26
+
+### Added
+- フレーバー「ストーリーベース」を追加 — 軽量なコンポーネントモデルベースの設計アプローチ
+- AI推薦型フレーバー選択 — プロジェクト特性を分析しAIが推薦、ユーザーが承認/変更
+- ユニット分解 step5 にプレゼンテーション層チェックリストを追加
+- 「UI統合ボルト」概念をボルト計画に導入（bolt-planning.md）
+- ADR延期セクション（延期先ボルト・理由・リスク）を論理設計ガイドに追加
+- build-bolt step0 に延期ADR読み込み、step2 に延期ADR解決手順を追加
+- build-bolt step6-final に未解決ADR延期ガード（「要計画」残存時は中断）を追加
+- build-bolt step6-final にE2Eブラウザ検証ステップを追加（UIプロジェクト限定）
+- cross-review 観点カタログに `ADR_DEFERRAL_RESOLVED` を追加
+- manifest.md の reportsセクションに e2e_verification_report エントリを追加
+- to_iac.md 前提条件にE2E検証レポート要件を追加（UIプロジェクトの場合）
+- `scripts/init.sh` — 冪等な初期セットアップスクリプト（フォルダ構造 + manifest.md テンプレート）
+- user-stories step0 でスクリプト実行による初期セットアップ
+- plugin-audit にステップ6「チェンジログ・CLAUDE.md の更新」を追加
+- plugin-audit 監査チェックリストに CHANGELOG.md・CLAUDE.md セクションを追加
+
+### Changed
+- フレーバー選択肢を DDD/BDD/TDD → DDD/BDD/ストーリーベース に変更
+- TDD を排他的フレーバーから全フレーバー共通の実装手法に格上げ
+- decomposition-principles.md の「技術レイヤー分割」アンチパターンにUI統合計画に関する補足を追加
+- 論理設計仕様の品質チェックリストにADR延期確認項目を追加
+- plugin.json の keywords に "story-based" を追加
+
+### Removed
+- TDDフレーバー（全フレーバー共通の実装手法に統合）
+
 ## [0.2.0] - 2026-03-23
 
 ### Added

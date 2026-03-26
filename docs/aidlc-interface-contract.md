@@ -1,6 +1,6 @@
 # AI-DLC インターフェース契約仕様
 
-## ステータス: v0.2.0 確定
+## ステータス: v0.3.0 確定
 
 ---
 
@@ -40,7 +40,7 @@ aidlc-docs/
 
 ## メタ
 - 意図: {高レベルの意図を1文で}
-- フレーバー: {DDD / BDD / TDD}
+- フレーバー: {DDD / BDD / ストーリーベース}
 - 開発種別: {グリーンフィールド / ブラウンフィールド}
 - 作成日: {YYYY-MM-DD}
 - 最終更新: {YYYY-MM-DD}
@@ -85,6 +85,7 @@ aidlc-docs/
 |----|---------|--------|----------|---------|
 | RPT-001 | reports/cross_review_report.md | A1:cross-review | 完了 | YYYY-MM-DD |
 | RPT-002 | reports/verification_report_{ボルト名}.md | A8:verification-report | 完了 | YYYY-MM-DD |
+| RPT-003 | reports/e2e_verification_report.md | S4:build-bolt | 完了 | YYYY-MM-DD |
 
 ### plans（計画）
 | ID | ファイル | 生成元 | ステータス | 最終更新 |
@@ -211,6 +212,7 @@ prerequisites:
   - "bolt_schedule.md に記載された全ボルトの verification_report が manifest.md に存在すること"
   - "全 bolt/ ブランチが統合ブランチにマージ済みであること"
   - "統合ブランチ上で全テストがパスすること"
+  - "UIプロジェクトの場合: reports/e2e_verification_report.md が存在し、全シナリオがOKであること"
 ```
 
 ```markdown

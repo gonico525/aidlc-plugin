@@ -2,14 +2,14 @@
 
 ## Project Overview
 
-AI-DLC (AI-Driven Development Lifecycle) の Claude Code プラグイン (v0.2.0)。
+AI-DLC (AI-Driven Development Lifecycle) の Claude Code プラグイン (v0.3.0)。
 AI がソフトウェア開発ライフサイクル全体（構想→構築→リリース→運用）を主導する手法を、8つのスキルと11のサブエージェントで実装している。
 公式 Claude Code プラグイン仕様に準拠。
 
 ## Structure
 
 ```
-.claude-plugin/plugin.json   # プラグインマニフェスト (v0.2.0)
+.claude-plugin/plugin.json   # プラグインマニフェスト (v0.3.0)
 skills/                       # 8スキル (SKILL.md + references/)
   user-stories/               # S1: user-stories — 意図→ユーザーストーリー
   unit-decomposition/         # S2: unit-decomposition — ストーリー→ユニット分解
@@ -24,6 +24,7 @@ docs/                         # 設計ドキュメント
   aidlc-plugin-architecture.md    # マスターアーキテクチャ
   aidlc-interface-contract.md     # スキル間インターフェース仕様
   aidlc-subagent-specs.md         # サブエージェント入出力仕様
+scripts/init.sh               # 初期セットアップスクリプト
 hooks/hooks.json              # Claude Code ライフサイクルフック
 ```
 

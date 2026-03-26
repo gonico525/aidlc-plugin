@@ -153,7 +153,24 @@ Phase 4: 検証
 
 検証結果をユーザーに報告する。
 
-### ステップ6：コミット
+### ステップ6：チェンジログ・CLAUDE.md の更新
+
+改修内容をプラグインのメタファイルに反映する。
+
+1. **CHANGELOG.md の更新**
+   - `## [X.Y.Z] - YYYY-MM-DD` セクションを追加
+   - 変更を `### Added` / `### Changed` / `### Removed` / `### Fixed` に分類して記載
+   - [Keep a Changelog](https://keepachangelog.com/) 形式に準拠
+2. **plugin.json の version 更新**
+   - 機能追加 → マイナーバージョン (0.X.0)
+   - 不整合修正のみ → パッチバージョン (0.0.X)
+3. **CLAUDE.md の更新**
+   - バージョン参照の更新
+   - Structure セクションの構造記述がファイル追加/削除を反映しているか確認
+4. **docs/ のステータスバージョン更新**
+   - 各ドキュメントの `## ステータス:` 行のバージョンを一致させる
+
+### ステップ7：コミット
 
 全検証が通ったら、変更をコミットする。
 
@@ -196,3 +213,12 @@ Phase 4: 検証
 - [ ] バージョン参照が plugin.json と一致
 - [ ] スキル名が `aidlc-` プレフィックス付きで統一されている
 - [ ] ステータスが最新の状態を反映している
+
+### CHANGELOG.md
+- [ ] 最新バージョンのエントリが存在する
+- [ ] plugin.json の version と CHANGELOG の最新エントリが一致する
+- [ ] Added / Changed / Removed / Fixed の分類が適切
+
+### CLAUDE.md
+- [ ] バージョン参照が plugin.json と一致
+- [ ] Structure セクションが実際のファイル構造と一致（scripts/ 等の追加漏れがないか）
