@@ -8,19 +8,5 @@
   "license": "MIT",
   "repository": "https://github.com/gonico525/aidlc-plugin",
   "homepage": "https://github.com/gonico525/aidlc-plugin#readme",
-  "keywords": ["aidlc", "sdlc", "ddd", "bdd", "tdd", "story-based", "domain-driven-design", "test-driven", "development-lifecycle"],
-  "skills": ["./skills/"],
-  "agents": [
-    "./agents/code-generator.md",
-    "./agents/cross-review.md",
-    "./agents/handoff-generator.md",
-    "./agents/iac-generator.md",
-    "./agents/infra-impl.md",
-    "./agents/monitoring-setup.md",
-    "./agents/pipeline-generator.md",
-    "./agents/refactorer.md",
-    "./agents/story-quality-check.md",
-    "./agents/test-generator.md",
-    "./agents/verification-report.md"
-  ]
+  "keywords": ["aidlc", "sdlc", "ddd", "bdd", "tdd", "story-based", "domain-driven-design", "test-driven", "development-lifecycle"]
 }

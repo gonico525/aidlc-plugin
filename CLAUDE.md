@@ -25,7 +25,8 @@ docs/                         # 設計ドキュメント
   aidlc-interface-contract.md     # スキル間インターフェース仕様
   aidlc-subagent-specs.md         # サブエージェント入出力仕様
 scripts/init.sh               # 初期セットアップスクリプト
-hooks/hooks.json              # Claude Code ライフサイクルフック
+hooks/hooks.json              # Claude Code ライフサイクルフック (現状は空のプレースホルダ)
+.claude-plugin/marketplace.json  # マーケットプレイス定義 (配布用ハブ)
 ```
 
 ## Key Concepts
@@ -53,7 +54,7 @@ hooks/hooks.json              # Claude Code ライフサイクルフック
 - スキル定義は `skills/<name>/SKILL.md` に記述
 - 参照ファイルは `skills/<name>/references/` 配下に配置
 - サブエージェント定義は `agents/<name>.md` に記述
-- フックは `hooks/hooks.json` で定義 (PostToolUse, SubagentStop)
+- フックは `hooks/hooks.json` で定義 (現状は空。必要時に PostToolUse / SubagentStop 等を追加)
 - ドキュメントは日本語で記述
 
 ### フロントマターフィールド
